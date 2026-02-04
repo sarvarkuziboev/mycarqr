@@ -3,42 +3,42 @@
     "name": "Aliyor", 
     "tel": "+998901112233", 
     "tg": "aliyor_dev", 
-    "car": "Chevrolet Malibu 2 • 777" ,
-    "plate": "01C789ZW"
+    "car": "Chevrolet Malibu 2 • 777" 
   },
   "2": { 
     "name": "Sardor", 
     "tel": "+998914445566", 
     "tg": "sardor_aka", 
-    "car": "Chevrolet Gentra • 001",
-    "plate": "01C789ZW"
+    "car": "Chevrolet Gentra • 001"
   },
   "3": { 
     "name": "Jasur", 
     "tel": "+998937778899", 
     "tg": "jasur_uz", 
-    "car": "Chevrolet Tracker • 555" ,
-    "plate": "01C789ZW"
+    "car": "Chevrolet Tracker • 555" 
   },
   "4": { 
     "name": "Sarvar", 
     "tel": "+998900383419", 
     "tg": "sarvar_kuziboev", 
-    "car": "Chevrolet Gentra • 985" ,
-    "plate": "01C789ZW"
+    "car": "Chevrolet Gentra • 985" 
   },
   "5": { 
     "name": "Anvar", 
     "tel": "+998995856443", 
     "tg": "rahmatullayevv_anvar", 
-    "car": "Chevrolet Gentra • 779" ,
-    "plate": "01C789ZW"
+    "car": "Chevrolet Gentra • 779" 
   },
   "6": { 
     "name": "Sardor Karimov", 
     "tel": "+998975133530", 
     "tg": "sardorbek606", 
-    "car": "Chevrolet Damas • 606" ,
-    "plate": "01C789ZW"
+    "car": "Chevrolet Damas • 606" 
+  },
+  "7": { 
+    "name": "Polvonzoda Raxmatullayev", 
+    "tel": "+998991300111", 
+    "tg": "rakxmatullaevv", 
+    "car": "Chevrolet Gentra • 121" 
   }
 }
