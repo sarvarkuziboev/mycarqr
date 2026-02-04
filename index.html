@@ -7,19 +7,20 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800&display=swap');
         
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             font-family: 'Montserrat', sans-serif;
             background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #0a0a0a 100%);
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            position: relative;
             overflow-x: hidden;
-            color: white;
         }
 
         @keyframes shimmer {
@@ -32,88 +33,167 @@
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
             animation: shimmer 3s linear infinite;
         }
 
         .luxury-card {
             background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(15, 15, 15, 0.98) 100%);
             backdrop-filter: blur(20px);
-            border: 2px solid #d4af37;
+            border: 3px solid;
+            border-image: linear-gradient(45deg, #d4af37, #f8e16c, #d4af37) 1;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .luxury-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .emblem-container {
+            position: relative;
+            filter: drop-shadow(0 10px 30px rgba(212, 175, 55, 0.5));
         }
 
         .btn-gold {
             background: linear-gradient(135deg, #d4af37 0%, #f8e16c 50%, #d4af37 100%);
             color: #000;
             font-weight: 700;
-            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .btn-gold::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-gold:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .btn-gold:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.5);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.6);
         }
+
+        .btn-gold:active { transform: translateY(-1px); }
 
         .ornament {
             width: 100%;
-            height: 1px;
+            height: 2px;
             background: linear-gradient(90deg, transparent, #d4af37, transparent);
             margin: 20px 0;
+        }
+
+        .fade-in { animation: fadeIn 0.8s ease-out; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .loader-ring {
             border: 4px solid rgba(212, 175, 55, 0.1);
             border-top: 4px solid #d4af37;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             animation: spin 1s linear infinite;
         }
 
         @keyframes spin { 100% { transform: rotate(360deg); } }
-        .fade-in { animation: fadeIn 0.6s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #d4af37, #f8e16c);
+            border-radius: 50%;
+            color: #000;
+            font-size: 20px;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .divider-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            margin: 10px 0;
+        }
     </style>
 </head>
-<body>
+<body class="flex items-center justify-center min-h-screen p-4">
 
-    <div id="loader" class="text-center">
+    <div id="loader" class="text-center fade-in">
         <div class="loader-ring mx-auto mb-4"></div>
-        <p class="gold-text font-semibold">YUKLANMOQDA...</p>
+        <p class="gold-text text-lg font-semibold tracking-wider">YUKLANMOQDA...</p>
     </div>
 
-    <div id="card" class="hidden luxury-card rounded-3xl w-full max-w-sm p-8 fade-in text-center">
-        <div class="mb-6">
-            <i class="fa-solid fa-crown text-5xl text-[#d4af37]"></i>
+    <div id="card" class="hidden luxury-card rounded-3xl shadow-2xl w-full max-w-md p-8 fade-in relative z-10">
+        
+        <div class="emblem-container mb-6">
+            <img src="emblem.png" alt="Gerb" class="w-32 h-32 mx-auto object-contain">
         </div>
 
         <div class="ornament"></div>
 
-        <h1 id="name" class="text-3xl font-bold mb-2 gold-text" style="font-family: 'Playfair Display', serif;">---</h1>
-        <p id="car-info" class="text-gray-400 text-xs tracking-[3px] uppercase mb-8">---</p>
+        <div class="text-center mb-8">
+            <h1 id="name" class="text-4xl font-bold mb-3 gold-text" style="font-family: 'Playfair Display', serif;">---</h1>
+            <div class="divider-line"></div>
+            <p id="car-info" class="text-gray-300 text-sm mt-3 tracking-[3px] uppercase font-medium">---</p>
+        </div>
 
         <div class="space-y-4">
-            <a id="tel-link" href="#" class="btn-gold flex items-center justify-center gap-3 py-4 rounded-xl">
-                <i class="fa-solid fa-phone"></i>
-                <span>QO'NG'IROQ QILISH</span>
+            <a id="tel-link" href="#" class="btn-gold flex items-center justify-center gap-4 py-5 rounded-2xl shadow-xl relative z-10">
+                <div class="contact-icon">
+                    <i class="fa-solid fa-phone"></i>
+                </div>
+                <span>Qo'ng'iroq Qilish</span>
             </a>
             
-            <a id="tg-link" href="#" class="btn-gold flex items-center justify-center gap-3 py-4 rounded-xl">
-                <i class="fa-brands fa-telegram"></i>
-                <span>TELEGRAM ORQALI</span>
+            <a id="tg-link" href="#" class="btn-gold flex items-center justify-center gap-4 py-5 rounded-2xl shadow-xl relative z-10">
+                <div class="contact-icon">
+                    <i class="fa-brands fa-telegram"></i>
+                </div>
+                <span>Telegram Orqali</span>
             </a>
         </div>
 
         <div class="ornament mt-8"></div>
-        <p class="text-[10px] text-gray-500 tracking-[4px] uppercase">Premium Aloqa Tizimi</p>
+        <p class="text-center text-gray-500 text-xs mt-4 tracking-widest uppercase">Premium Aloqa Tizimi</p>
     </div>
 
-    <div id="error" class="hidden text-center luxury-card rounded-3xl p-8 max-w-sm fade-in">
-        <i class="fa-solid fa-triangle-exclamation text-5xl text-red-500 mb-4"></i>
-        <h2 class="text-xl font-bold gold-text">XATOLIK!</h2>
-        <p class="text-gray-400 mt-2 text-sm">Ma'lumot topilmadi yoki ID noto'g'ri.</p>
+    <div id="error" class="hidden text-center luxury-card rounded-3xl p-8 max-w-md fade-in">
+        <div class="text-6xl mb-4">⚠️</div>
+        <h2 class="text-2xl font-bold mb-3 gold-text" style="font-family: 'Playfair Display', serif;">Xatolik!</h2>
+        <div class="ornament"></div>
+        <p class="text-gray-300 mt-4">Ma'lumot topilmadi yoki QR kod noto'g'ri skanerlandi.</p>
     </div>
 
     <script>
@@ -122,9 +202,7 @@
                 const params = new URLSearchParams(window.location.search);
                 const id = params.get('id');
                 
-                // data.json faylidan ma'lumotlarni olish
                 const response = await fetch('data.json');
-                if (!response.ok) throw new Error("Fayl topilmadi");
                 const users = await response.json();
                 
                 setTimeout(() => {
@@ -134,22 +212,21 @@
                         const user = users[id];
                         document.getElementById('card').classList.remove('hidden');
                         document.getElementById('name').innerText = user.name;
-                        document.getElementById('car-info').innerText = user.car || "MOSHINA EGASI";
+                        document.getElementById('car-info').innerText = user.car || "Moshina Egasi";
                         
-                        // Telefon linkini sozlash
+                        // Faqat mavjud elementlarga qiymat beramiz (Xatolar olib tashlandi)
                         document.getElementById('tel-link').href = `tel:${user.tel}`;
                         
-                        // Telegram linkini sozlash (@ belgisini olib tashlaymiz agar bo'lsa)
+                        // Telegram username dagi @ belgisini tozalash
                         const cleanTg = user.tg.replace('@', '');
                         document.getElementById('tg-link').href = `https://t.me/${cleanTg}`;
                     } else {
                         document.getElementById('error').classList.remove('hidden');
                     }
                 }, 800);
-
             } catch (err) {
                 console.error("Xatolik:", err);
-                document.getElementById('loader').innerHTML = '<p class="text-red-500">Bazaga ulanishda xato!</p>';
+                document.getElementById('loader').innerHTML = '<p class="text-red-400">Bazaga ulanib bo\'lmadi...</p>';
             }
         }
         loadUser();
