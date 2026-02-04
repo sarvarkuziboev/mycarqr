@@ -175,6 +175,45 @@
             background: linear-gradient(90deg, transparent, #d4af37, transparent);
             margin: 10px 0;
         }
+
+        /* License Plate Styles */
+        .license-plate-container {
+            position: relative;
+            filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.5));
+        }
+
+        .license-plate-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 900;
+            color: #000;
+            font-family: 'Arial Black', sans-serif;
+            letter-spacing: 2px;
+        }
+
+        .region-code {
+            font-size: clamp(20px, 5vw, 32px);
+            background: linear-gradient(180deg, #000 0%, #333 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            padding-right: 8px;
+            border-right: 3px solid #000;
+        }
+
+        .plate-number {
+            font-size: clamp(24px, 6vw, 42px);
+            background: linear-gradient(180deg, #000 0%, #2a2a2a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 3px;
+        }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen p-4">
@@ -203,6 +242,17 @@
             <p id="car-info" class="text-gray-300 text-sm mt-3 tracking-[3px] uppercase font-medium">---</p>
         </div>
 
+        <!-- Contact Info Display -->
+        <div class="mb-8 space-y-3">
+            <div class="flex items-center justify-between bg-black/30 rounded-xl p-3 border border-gray-800">
+                <span class="info-label">TELEFON</span>
+                <span id="tel-display" class="text-white font-semibold tracking-wide">---</span>
+            </div>
+            <div class="flex items-center justify-between bg-black/30 rounded-xl p-3 border border-gray-800">
+                <span class="info-label">TELEGRAM</span>
+                <span id="tg-display" class="text-white font-semibold">---</span>
+            </div>
+        </div>
 
         <!-- Action Buttons -->
         <div class="space-y-4">
@@ -219,6 +269,18 @@
                 </div>
                 <span>Telegram Orqali</span>
             </a>
+        </div>
+
+        <!-- License Plate Section -->
+        <div class="mt-8 mb-6">
+            <p class="info-label text-center mb-4">Davlat Raqami</p>
+            <div class="license-plate-container relative mx-auto" style="width: 100%; max-width: 350px;">
+                <img src="license-plate.png" alt="Davlat raqami" class="w-full h-auto rounded-lg">
+                <div class="license-plate-text">
+                    <span class="region-code" id="region-code">01</span>
+                    <span class="plate-number" id="plate-number">A123BC</span>
+                </div>
+            </div>
         </div>
 
         <!-- Bottom ornament -->
@@ -256,6 +318,14 @@
                         document.getElementById('tg-display').innerText = '@' + user.tg;
                         document.getElementById('tel-link').href = `tel:${user.tel}`;
                         document.getElementById('tg-link').href = `https://t.me/${user.tg}`;
+                        
+                        // Set license plate
+                        if (user.plate) {
+                            const regionCode = user.plate.substring(0, 2);
+                            const plateNumber = user.plate.substring(2);
+                            document.getElementById('region-code').innerText = regionCode;
+                            document.getElementById('plate-number').innerText = plateNumber;
+                        }
                     } else {
                         document.getElementById('error').classList.remove('hidden');
                     }
