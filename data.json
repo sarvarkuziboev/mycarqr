@@ -16,5 +16,17 @@
     "tel": "+998937778899", 
     "tg": "jasur_uz", 
     "car": "Chevrolet Tracker • 555" 
+  },
+  "4": { 
+    "name": "Sarvar", 
+    "tel": "+998900383419", 
+    "tg": "sarvar_kuziboev", 
+    "car": "Chevrolet Gentra • 985" 
+  },
+  "5": { 
+    "name": "Anvar", 
+    "tel": "+998995856443", 
+    "tg": "rahmatullayevv_anvar", 
+    "car": "Chevrolet Gentra • 779" 
   }
 }
